@@ -17,7 +17,7 @@ module.exports.cacheRedis = function (req, res, next) {
         redisClient.get(req.params.id, (err, data) => {
             if (data!=null) {
                 res.header('X-Cached-Data' , 1 );
-                res.status(200).json({
+                return res.status(200).json({
                     description:'OK | successfully fetched record',
                     value: JSON.parse(data)
                 });
@@ -28,7 +28,7 @@ module.exports.cacheRedis = function (req, res, next) {
         redisClient.get('all', (err, data) => {
             if (data!=null) {
                 res.header('X-Cached-Data' , 1 );
-                res.status(200).json({
+                return res.status(200).json({
                     description:'OK | successfully fetched list of records',
                     value: JSON.parse(data)
                 });
